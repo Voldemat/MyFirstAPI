@@ -10,6 +10,7 @@ psycopg2-binary = "*"
 django-rest-auth = "*"
 django-allauth = "*"
 django-rest-swagger = "*"
+pillow = "*"
 
 [dev-packages]
 

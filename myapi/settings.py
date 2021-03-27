@@ -36,6 +36,9 @@ INSTALLED_APPS = [
     'allauth.account',
 
     'rest_auth',
+
+    # local
+    'articles.apps.ArticlesConfig',
 ]
 
 MIDDLEWARE = [
@@ -124,6 +127,24 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
-SITE_ID = 1
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+
+SITE_ID = 1
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+API_TITLE = 'My API'
+API_DESCRIPTION = 'My API description!!!'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES':[
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES':[
+        'rest_framework.permissions.AllowAny',
+    ],
+    'DEFAULT_SCHEMA_CLASS':'rest_framework.schemas.coreapi.AutoSchema',
+}
