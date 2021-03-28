@@ -15,7 +15,7 @@ class Subject(models.Model):
 
 	dsc         = models.CharField(verbose_name = 'Description', max_length = 500)
 
-	preview_img = models.ImageField(verbose_name = 'Subject Image', upload_to = 'subjects/images/')
+	preview_img = models.ImageField(verbose_name = 'Subject Image', upload_to = 'subjects/images/', null = True, blank = True)
 
 	def __str__(self):
 		return self.title
@@ -50,7 +50,7 @@ class Article(models.Model):
 
 	def get_gallery(self):
 		try:
-			gallery = self.gallery.get()
+			gallery = self.gallery
 		
 		except ArticleGallery.DoesNotExist:
 			gallery = ArticleGallery.objects.create(article = self)
@@ -64,10 +64,13 @@ class ArticleGallery(models.Model):
 		editable = False,
 		primary_key = True
 	)
-	article = models.ForeignKey(Article, on_delete = models.CASCADE, related_name = 'gallery')
+	article = models.OneToOneField(Article, on_delete = models.CASCADE, related_name = 'gallery')
 
 	def __str__(self):
-		return f'{self.article} Gallery ({self.id})'
+		return f'{self.article.__str__().capitalize()} -> Gallery'
+
+	def get_images(self):
+		return self.images.all()
 
 class ArticleGalleryImage(models.Model):
 	id = models.UUIDField(
@@ -80,4 +83,4 @@ class ArticleGalleryImage(models.Model):
 	image = models.ImageField(verbose_name = 'Image', upload_to = 'articles/img/gallery/')
 
 	def __str__(self):
-		return f'{self.gallery} - Image {self.id}'
+		return f'{self.gallery} -> Image {self.id}'
