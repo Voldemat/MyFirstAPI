@@ -36,6 +36,8 @@ class Article(models.Model):
     
     authors = models.ManyToManyField(get_user_model())
 
+    subject = models.ForeignKey(Subject, on_delete = models.PROTECT, related_name = 'articles', null = True, blank = True)
+
     text = models.TextField(verbose_name = 'Main Text')
 
     created_at = models.DateTimeField(verbose_name = 'Created at', auto_now_add = True)
@@ -45,6 +47,12 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+    def gallery(self):
+        try:
+            return ArticleGallery.objects.get(article = self)
+        except DoesNotExist:
+            return None
 
 class ArticleGallery(models.Model):
     id = models.UUIDField(
