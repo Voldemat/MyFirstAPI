@@ -59,7 +59,7 @@ class ArticleViewSetTestCase(TestCase):
 
 
 
-class GalleryViewSet(TestCase):
+class GalleryViewSetTestCase(TestCase):
 	def setUp(self):
 		self.client = APIClient()
 
@@ -95,5 +95,19 @@ class GalleryViewSet(TestCase):
 		)
 
 
-class ArticleGalleryDetailView(TestCase):
-	pass
+class ArticleGalleryDetailViewTestCase(TestCase):
+	def setUp(self):
+		self.client = APIClient()
+
+		self.article = Article.objects.get_or_create(**Data.article_test_data)[0]
+
+		self.response = self.client.get(f'/api/v1/articles/{self.article.id.__str__()}/gallery/')
+
+	def test_status_code(self):
+		self.assertEqual(self.response.status_code, 200)
+
+	def test_detail_response(self):
+		self.assertEqual(
+			self.article.gallery.id.__str__(),
+			self.response.json()['id']
+		)
