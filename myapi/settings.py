@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # local
     'articles.apps.ArticlesConfig',
     'api.apps.ApiConfig',
+    'modules.apps.ModulesConfig',
 ]
 
 MIDDLEWARE = [

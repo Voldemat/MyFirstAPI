@@ -6,7 +6,7 @@ from django.urls import reverse
 
 from rest_framework.test import APIRequestFactory, APIClient
 
-from ....modules.utils import search_objects_from_datalist
+from modules.utils import search_objects_from_datalist
 
 from ..models import (
 	Article,
@@ -40,21 +40,36 @@ class ArticleViewSetTestCase(TestCase):
 			Article.objects.create(**article_test_data_2),
 
 		]
-		self.response = self.client.get('/api/v1/articles/', format = 'json', content_type = 'application/json')
-		self.data = self.response.json()
+		self.detail_instance = self.article_list[0]
+		self.list_response = self.client.get('/api/v1/articles/', format = 'json', content_type = 'application/json')
+		self.detail_response = self.client.get(f'/api/v1/articles/{self.detail_instance.id.__str__()}/')
+
+
+
+		# self.article_list.append(
+		# 	Article.objects.create(**article_test_data)
+		# )
 
 
 	def test_status_code(self):
-		self.assertEqual(self.response.status_code, 200)
+		self.assertEqual(self.list_response.status_code, 200)
+		self.assertEqual(self.detail_response.status_code, 200)
 
-	def test_content(self):
+	def test_list_response(self):
 		self.assertTrue(
 			search_objects_from_datalist(
 				'id', # search key name
-				[self.article.id.__str(),], # value list
-				self.data # datalist:List[dict]
+				[article.id.__str__() for article in self.article_list], # value list
+				self.list_response.json() # datalist:List[dict]
 			)
 		)
+	def test_detail_response(self):
+		self.assertEqual(
+			self.detail_instance.id.__str__(),
+			self.detail_response.json()['id']
+		)
+
+
 
 
 class GalleryViewSet(TestCase):
