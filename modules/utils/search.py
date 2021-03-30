@@ -1,7 +1,7 @@
-from typing import List, Optional
+from typing import List
 from colorama import Fore, Style
 
-def search_objects_from_datalist(key_name:str, value_list:list, datalist:List[dict]) -> Optional[bool]:
+def search_objects_from_datalist(key_name:str, value_list:list, datalist:List[dict]) -> None:
 	for obj in datalist:
 		try:
 			# try get the property value from obj
@@ -19,7 +19,7 @@ def search_objects_from_datalist(key_name:str, value_list:list, datalist:List[di
 				value_list.remove(key_value)
 
 				# if no other values in value_list return True
-				if len(value_list) == 0: return True
+				if len(value_list) == 0: return None
 
 	# if some element don`t in datalist return False
 	error = '\n'
