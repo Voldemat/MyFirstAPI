@@ -14,7 +14,7 @@ from .views import (
 router = SimpleRouter()
 
 router.register('articles', ArticleViewSet, basename = 'articles')
-router.register('galleries', GalleryViewSet, basename = 'gallery')
+router.register('galleries', GalleryViewSet, basename = 'galleries')
 
 urlpatterns = [
     path('articles/<uuid:pk>/gallery/', ArticleGalleryDetailView, name = 'article_gallery'),

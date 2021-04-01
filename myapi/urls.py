@@ -25,5 +25,5 @@ swagger_view = get_swagger_view(title = settings.API_TITLE)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('docs/', swagger_view),
-    path('api/v1/', include('api.urls')),
+    path(settings.API_URL, include('api.urls')),
 ]

@@ -137,6 +137,7 @@ SITE_ID = 1
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
+API_URL = 'api/v1/'
 API_TITLE = 'My API'
 API_DESCRIPTION = 'My API description!!!'
 

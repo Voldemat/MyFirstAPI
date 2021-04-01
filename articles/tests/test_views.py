@@ -77,8 +77,8 @@ class GalleryViewSetTestCase(TestCase):
 		self.detail_instance = self.gallery_list[0]
 
 		# SET URLS PATH
-		list_url = reverse('gallery-list')
-		detail_url = reverse('gallery-detail', args = [self.detail_instance.id.__str__()])
+		list_url = reverse('galleries-list')
+		detail_url = reverse('galleries-detail', args = [self.detail_instance.id.__str__()])
 		
 		# MAKE REQUESTS
 		self.list_response = self.client.get(list_url)
