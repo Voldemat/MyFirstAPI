@@ -1,9 +1,13 @@
 from django.urls import path, include
-# from rest_framework.routers import SimpleRouter
-from articles.urls import urlpatterns as articles_urls
+from django.conf import settings
+
+from rest_framework_swagger.views import get_swagger_view 
 
 
 
-urlpatterns = []
+swagger_view = get_swagger_view(title = settings.API_TITLE)
 
-urlpatterns += articles_urls
+urlpatterns = [
+    path('', include('articles.urls')),
+    path('docs/', swagger_view),
+]

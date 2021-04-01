@@ -8,10 +8,7 @@ def strictvalidation(value_list:list):
 
 
 def comparisonvalidation(valuelists:List[list]):
-    print('func start')
-    print(valuelists)
     for pair_list in valuelists:
-        print(pair_list)
         if len(pair_list) > 2:
             raise ValueError('Comparison values lists have more than 2 elements')
         if pair_list[0] == None and pair_list[1] == None:
