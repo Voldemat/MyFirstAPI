@@ -6,7 +6,6 @@ from django.urls import reverse
 from rest_framework.test import APIRequestFactory, APIClient
 
 from modules.utils import search_objects_from_datalist
-from modules.tests import ViewSetTestCaseMethodGet
 
 from ..models import (
 	Article,
@@ -23,16 +22,6 @@ from ..views import (
 
 from .testdata import Data
 
-
-articleviewsettestcase = ViewSetTestCaseMethodGet(
-	object_list = [
-		Article.objects.create(**Data.article_test_data),
-		Article.objects.create(**Data.article_test_data_2),
-	],
-	list_reverse_name = 'articles-list',
-	detail_reverse_name = 'articles-detail'
-
-)
 
 
 class ArticleViewSetTestCase(TestCase):
