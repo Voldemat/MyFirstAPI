@@ -10,11 +10,13 @@ from rest_framework.viewsets import (
 from .models import (
     Article,
     ArticleGallery,
+    Subject,
 )
 
 from .serializers import (
     ArticleSerializer,
     GallerySerializer,
+    SubjectSerializer
 )
 # Create your views here.
 
@@ -25,6 +27,14 @@ class ArticleViewSet(ModelViewSet):
 class GalleryViewSet(ModelViewSet):
     queryset = ArticleGallery.objects.all()
     serializer_class = GallerySerializer
+
+
+class SubjectViewSet(ModelViewSet):
+    queryset = Subject.objects.all()
+    serializer_class = SubjectSerializer
+
+
+
 
 @csrf_exempt
 def ArticleGalleryDetailView(request, pk):
