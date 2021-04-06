@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container"></div>
+    <script>
+        console.log('start')
+        document.addEventListener('DOMContentLoaded', function(){
+            fetch('http://127.0.0.1:8000/api/v1/check/')
+                .then(res => {
+                    return res.json()
+                })
+                .then(data => {
+                    console.log(data)
+                    document.querySelector('.container').innerHTML = data['data']
+                })
+        })
+    </script>
+</body>
+</html>

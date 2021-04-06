@@ -1,3 +1,4 @@
+
 from django.urls import path
 
 from rest_framework.routers import SimpleRouter
@@ -8,6 +9,9 @@ from .views import (
     SubjectViewSet,
 
     ArticleGalleryDetailView,
+
+    check,
+    static_page
 )
 
 
@@ -20,5 +24,7 @@ router.register('subjects', SubjectViewSet, basename = 'subjects')
 
 urlpatterns = [
     path('articles/<uuid:pk>/gallery/', ArticleGalleryDetailView, name = 'article_gallery'),
+    path('check/', check, name = 'check'),
+    path('static_page/', static_page),
 ]
 urlpatterns += router.urls

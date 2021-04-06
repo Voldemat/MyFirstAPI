@@ -1,6 +1,7 @@
 from django.http import JsonResponse
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-
+from django.template import loader
 
 from rest_framework import generics
 from rest_framework.viewsets import (
@@ -62,3 +63,11 @@ def ArticleGalleryDetailView(request, pk):
         return JsonResponse(data, status = status)
             
     
+
+def static_page(request):
+    return render(request, 'index.html', {})
+def check(request):
+    datalist = [1,4,56,3, 3242]
+    context = {'datalist':datalist}
+    content = loader.render_to_string('block.html',context, request)
+    return JsonResponse({'data':content}, status = 200)
